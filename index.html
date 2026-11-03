@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsBrief - Gestore Notizie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #151C2C;
+            --primary: #6366F1;
+            --primary-hover: #4F46E5;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: #1E293B;
+            --danger: #EF4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .form-container {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        button.pubblica-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .news-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .news-category {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .news-snippet {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📰 NewsBrief</h1>
+        <button class="btn-add" onclick="toggleForm()">+ Nuova Notizia</button>
+    </header>
+
+    <div class="form-container" id="newsForm">
+        <input type="text" id="newsTitle" placeholder="Titolo della notizia...">
+        <select id="newsCat">
+            <option value="Territorio & Eventi">Territorio & Eventi</option>
+            <option value="Economia Locale">Economia Locale</option>
+            <option value="Cultura & Spettacolo">Cultura & Spettacolo</option>
+            <option value="Cronaca">Cronaca</option>
+        </select>
+        <textarea id="newsContent" rows="3" placeholder="Contenuto o sommario..."></textarea>
+        <button class="pubblica-btn" onclick="addNews()">Pubblica Notizia</button>
+    </div>
+
+    <main id="newsFeed"></main>
+
+    <script>
+        let newsData = JSON.parse(localStorage.getItem('newsbrief_data')) || [
+            {
+                id: 1,
+                title: "Inaugurazione del nuovo parco urbano",
+                cat: "Territorio & Eventi",
+                content: "Completati i lavori di riqualificazione dell'area nord: spazi verdi attrezzati per i cittadini."
+            }
+        ];
+
+        function renderNews() {
+            const feed = document.getElementById('newsFeed');
+            feed.innerHTML = '';
+            newsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <button class="btn-delete" onclick="deleteNews(${item.id})">🗑️</button>
+                    <div class="news-category">${item.cat}</div>
+                    <h2 class="news-title">${item.title}</h2>
+                    <p class="news-snippet">${item.content}</p>
+                `;
+                feed.appendChild(card);
+            });
+        }
+
+        function toggleForm() {
+            const form = document.getElementById('newsForm');
+            form.classList.toggle('active');
+        }
+
+        function addNews() {
+            const title = document.getElementById('newsTitle').value;
+            const cat = document.getElementById('newsCat').value;
+            const content = document.getElementById('newsContent').value;
+
+            if(!title || !content) {
+                alert('Inserisci sia il titolo che il contenuto!');
+                return;
+            }
+
+            const newItem = {
+                id: Date.now(),
+                title: title,
+                cat: cat,
+                content: content
+            };
+
+            newsData.unshift(newItem);
+            localStorage.setItem('newsbrief_data', JSON.stringify(newsData));
+            renderNews();
+            
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsContent').value = '';
+            toggleForm();
+        }
+
+        function deleteNews(id) {
+            newsData = newsData.filter(item => item.id !== id);
+            localStorage.setItem('newsbrief_data', JSON.stringify(newsData));
+            renderNews();
+        }
+
+        renderNews();
+    </script>
+</body>
+</html>
