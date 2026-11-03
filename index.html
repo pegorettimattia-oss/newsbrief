@@ -10,14 +10,10 @@
             --bg-main: #0B0F19;
             --bg-card: #151C2C;
             --primary: #6366F1;
-            --primary-glow: rgba(99, 102, 241, 0.25);
-            --accent: #8B5CF6;
             --text-main: #F8FAFC;
             --text-muted: #94A3B8;
             --border: #1E293B;
             --success: #10B981;
-            --danger: #EF4444;
-            --warning: #F59E0B;
         }
 
         * {
@@ -32,109 +28,91 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
+            padding: 16px;
+        }
+
+        header {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background-image: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 50%);
-        }
-
-        .container {
-            max-width: 480px;
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px 24px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5),
-                        0 0 30px 0 var(--primary-glow);
-            text-align: center;
-        }
-
-        .logo-badge {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 18px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
         }
 
         h1 {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            color: var(--primary);
         }
 
-        p.subtitle {
-            color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
-
-        .status-box {
+        .badge {
             background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
             color: var(--success);
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 24px;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--success);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--success);
+        .news-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
         }
 
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            text-decoration: none;
-            border-radius: 14px;
+        .news-category {
+            font-size: 11px;
             font-weight: 600;
-            font-size: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
         }
 
-        .btn:active {
-            transform: scale(0.98);
+        .news-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-snippet {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-badge">📰</div>
-        <h1>NewsBrief</h1>
-        <p class="subtitle">La tua PWA per notizie e territorio è pronta e configurata correttamente.</p>
-        
-        <div class="status-box">
-            <span class="status-dot"></span>
-            Applicazione Attiva & Online
+    <header>
+        <h1>📰 NewsBrief</h1>
+        <span class="badge">Live</span>
+    </header>
+
+    <main>
+        <div class="news-card">
+            <div class="news-category">Territorio & Eventi</div>
+            <h2 class="news-title">Inaugurazione del nuovo parco urbano e piste ciclabili</h2>
+            <p class="news-snippet">Completati i lavori di riqualificazione dell'area nord: spazi verdi attrezzati e mobilità sostenibile al centro del piano comunale.</p>
         </div>
 
-        <a href="#" class="btn" onclick="alert('NewsBrief è pronto!')">Esplora NewsBrief</a>
-    </div>
+        <div class="news-card">
+            <div class="news-category">Economia Locale</div>
+            <h2 class="news-title">Bando per le imprese giovanili: via alle domande</h2>
+            <p class="news-snippet">Nuovi incentivi a fondo perduto per le startup del territorio. Ecco i requisiti e le scadenze per presentare le richieste.</p>
+        </div>
+
+        <div class="news-card">
+            <div class="news-category">Cultura</div>
+            <h2 class="news-title">Mostra storica nel centro storico questo fine settimana</h2>
+            <p class="news-snippet">Apre al pubblico l'esposizione fotografica dedicata alle tradizioni locali e agli archivi storici della città.</p>
+        </div>
+    </main>
 
 </body>
 </html>
+
