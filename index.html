@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsBrief Pro | Finanza & Notizie Live</title>
+    <meta name="description" content="Notizie finanziarie in tempo reale, prezzi di borsa live e calcolatore d'investimento.">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --green: #22c55e;
+            --red: #ef4444;
+            --border: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding-bottom: 40px; }
+        
+        header { background: var(--card); padding: 18px; text-align: center; border-bottom: 1px solid var(--border); }
+        header h1 { font-size: 1.4rem; color: var(--accent); }
+        .tag { background: #0284c7; color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; margin-left: 6px; }
+
+        .ticker-bar { display: flex; gap: 10px; overflow-x: auto; padding: 12px; background: #0284c710; border-bottom: 1px solid var(--border); }
+        .ticker-item { background: var(--card); border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; min-width: 110px; flex-shrink: 0; }
+        .ticker-symbol { font-size: 0.8rem; font-weight: bold; }
+        .ticker-price { font-size: 0.9rem; margin-top: 2px; }
+        .up { color: var(--green); }
+        .down { color: var(--red); }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+        .title { font-size: 1.1rem; margin: 20px 0 10px 0; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+
+        .news-item { background: var(--card); border: 1px solid var(--border); padding: 14px; border-radius: 8px; margin-bottom: 10px; }
+        .news-item a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.98rem; display: block; margin-bottom: 6px; }
+        .news-item a:hover { color: var(--accent); }
+        .news-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.4; margin-bottom: 8px; }
+        .news-time { font-size: 0.75rem; color: var(--accent); }
+
+        .calc-box { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 8px; }
+        .field { margin-bottom: 10px; }
+        .field label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+        .field input { width: 100%; padding: 8px; background: #0f172a; border: 1px solid var(--border); color: #fff; border-radius: 4px; }
+        
+        .btn { background: var(--accent); color: #0f172a; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .res { margin-top: 12px; background: #0284c720; padding: 10px; border-radius: 6px; text-align: center; }
+
+        .sponsor-box { background: #1e293b; border: 1px solid var(--green); padding: 16px; border-radius: 8px; text-align: center; margin-top: 25px; }
+        .btn-sponsor { display: inline-block; background: var(--green); color: white; padding: 10px 16px; border-radius: 6px; text-decoration
