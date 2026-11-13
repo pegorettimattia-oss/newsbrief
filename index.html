@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsBrief Finance - Pianificazione Finanziaria & Crescita Capitale</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --border-color: #334155;
+      --pro-gold: #f59e0b;
+      --pro-gold-hover: #d97706;
+      --ad-bg: #111827;
+      --aff-bg: rgba(6, 78, 59, 0.3);
+      --aff-border: #059669;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-top: 10px;
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      color: var(--accent-color);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Spazi Banner Pubblicitari & Affiliazioni */
+    .ad-box {
+      background-color: var(--ad-bg);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-bottom: 22px;
+    }
+
+    .affiliate-box {
+      background-color: var(--aff-bg);
+      border: 1px solid var(--aff-border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .affiliate-box h4 {
+      color: #34d399;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .affiliate-box p {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+    }
+
+    .btn-affiliate {
+      display: inline-block;
+      background-color: #059669;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-affiliate:hover {
+      background-color: #047857;
+    }
+
+    /* Cards dei Tool */
+    .card-tool {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+    }
+
+    .card-tool h2 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 12px;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+
+    button.btn-calc {
+      background-color: var(--accent-color);
+      color: #0f172a;
+      border: none;
+      padding: 11px 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    button.btn-calc:hover {
+      background-color: var(--accent-hover);
+    }
+
+    button.btn-calc-pro {
+      background-color: var(--pro-gold);
+      color: #0f172a;
+      border: none;
+      padding: 11px 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    button.btn-calc-pro:hover {
+      background-color: var(--pro-gold-hover);
+    }
+
+    .result {
+      margin-top: 16px;
+      padding: 14px;
+      background-color: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .result-pro {
+      margin-top: 16px;
+      padding: 14px;
+      background-color: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid var(--pro-gold);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* Stile Area PRO */
+    .pro-section {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 2px solid var(--pro-gold);
+      border-radius: 14px;
+      padding: 26px;
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+
+    .pro-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .pro-section h3 {
+      color: var(--pro-gold);
+      font-size: 1.4rem;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background-color: rgba(245, 158, 11, 0.15);
+      color: var(--pro-gold);
+      border: 1px solid var(--pro-gold);
+    }
+
+    .status-badge.unlocked {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border-color: #10b981;
+    }
+
+    .pro-section > p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .pro-features {
+      list-style: none;
+      margin-bottom: 22px;
+    }
+
+    .pro-features li {
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+    }
+
+    /* Box Singolo Prezzo PRO */
+    .single-price-box {
+      background-color: var(--bg-color);
+      border: 1px solid var(--pro-gold);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .single-price-box .tag {
+      display: inline-block;
+      background-color: var(--pro-gold);
+      color: #0f172a;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .single-price-box h4 {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .single-price-box .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-color);
+      margin: 6px 0;
+    }
+
+    .single-price-box .price-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .btn-pro-buy {
+      display: inline-block;
+      background-color: var(--pro-gold);
+      color: #0f172a;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 340px;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-pro-buy:hover {
+      background-color: var(--pro-gold-hover);
+    }
+
+    /* Contenitore Strumenti PRO Sbloccati */
+    .pro-tools-container {
+      margin-top: 20px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+
+    .pro-subcard {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pro-subcard h4 {
+      color: var(--pro-gold);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 35px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .dev-test-btn {
+      margin-top: 12px;
+      background: transparent;
+      border: 1px solid #334155;
+      color: #64748b;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+    }
+
+    .dev-test-btn:hover {
+      color: #cbd5e1;
+      border-color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>NewsBrief Finance</h1>
+      <p>Strumenti pratici per organizzare lo stipendio e far crescere il tuo capitale</p>
+    </header>
+
+    <!-- BANNER AD (Top) -->
+    <div class="ad-box">
+      <span>Spazio Pubblicitario / Google AdSense (Top)</span>
+    </div>
+
+    <!-- 1. TOOL FREE: SUDDIVISIONE INTELLIGENTE DELLO STIPENDIO -->
+    <div class="card-tool">
+      <h2>📊 Suddivisione Intelligente dello Stipendio</h2>
+      <p class="card-subtitle">Inserisci il tuo netto mensile per ottenere subito un piano bilanciato tra spese, sicurezza e crescita.</p>
+      <div class="form-group">
+        <label for="stipendioBudget">Stipendio Mensile Netto (€):</label>
+        <input type="number" id="stipendioBudget" placeholder="es. 1650">
+      </div>
+      <button class="btn-calc" onclick="calcolaBudget()">Genera Piano Mensile</button>
+      <div id="risultatoBudget" class="result" style="display:none;"></div>
+    </div>
+
+    <!-- AFFILIAZIONE 1 -->
+    <div class="affiliate-box">
+      <h4>💡 Dove far fruttare la quota dedicata ai tuoi risparmi?</h4>
+      <p>Scopri le piattaforme regolamentate per automatizzare i tuoi investimenti anche partendo da piccole cifre.</p>
+      <a href="LINK_AFFILIATO_PARTNER" class="btn-affiliate" target="_blank">Scopri il Broker Partner</a>
+    </div>
+
+    <!-- 2. TOOL FREE: SIMULATORE PAC -->
+    <div class="card-tool">
+      <h2>📈 Simulatore PAC & Interesse Composto</h2>
+      <p class="card-subtitle">Calcola quanto può crescere un piccolo accantonamento mensile nel tempo grazie all'interesse composto.</p>
+      <div class="form-group">
+        <label for="investimentoMensile">Accantonamento Mensile (€):</label>
+        <input type="number" id="investimentoMensile" placeholder="es. 200">
+      </div>
+      <div class="form-group">
+        <label for="anniPac">Durata dell'Investimento (Anni):</label>
+        <input type="number" id="anniPac" placeholder="es. 15">
+      </div>
+      <div class="form-group">
+        <label for="rendimentoStimato">Rendimento Annuo Medio Stimato (%):</label>
+        <input type="number" id="rendimentoStimato" placeholder="6" value="6">
+      </div>
+      <button class="btn-calc" onclick="calcolaPac()">Simula Crescita Capitale</button>
+      <div id="risultatoPac" class="result" style="display:none;"></div>
+    </div>
+
+    <!-- BANNER AD (Middle) -->
+    <div class="ad-box">
+      <span>Spazio Pubblicitario / Google AdSense (Banner Centrale)</span>
+    </div>
+
+    <!-- 3. AREA PRO (PREZZO UNICO 6,99 €) -->
+    <div class="pro-section">
+      <div class="pro-header">
+        <h3>🔥 Area PRO — Suite Avanzata</h3>
+        <span id="proStatusBadge" class="status-badge">🔒 Bloccata</span>
+      </div>
+
+      <!-- VISTA BLOCCATA (VETRINA ACQUISTO) -->
+      <div id="proLockedView">
+        <p>Sblocca tutti gli strumenti avanzati di pianificazione finanziaria con un unico accesso illimitato:</p>
+        <ul class="pro-features">
+          <li>🔥 <strong>Simulatore FIRE:</strong> Calcola esattamente il capitale necessario per vivere di rendita.</li>
+          <li>🎯 <strong>Calcolatore Obiettivi Inversi:</strong> Scegli una cifra finale (es. anticipo casa) e scopri quanto mettere via ogni mese.</li>
+          <li>📉 <strong>Calcolatore Impatto Inflazione:</strong> Scopri quanto varranno realmente i tuoi risparmi tra 10, 20 o 30 anni.</li>
+        </ul>
+        
+        <div class="single-price-box">
+          <span class="tag">Accesso Completo</span>
+          <h4>Sblocca Tutto Senza Abbonamenti</h4>
+          <p class="price">6,99 €</p>
+          <p class="price-note">Pagamento unico • Nessun rinnovo automatico • Accesso illimitato</p>
+          <!-- Cliccando qui, in futuro aprirà Stripe. Per ora simula lo sblocco diretto -->
+          <button class="btn-pro-buy" onclick="simulaAcquistoStripe()">Sblocca Ora a 6,99 €</button>
+        </div>
+      </div>
+
+      <!-- VISTA SBLOCCATA (STRUMENTI PRO REALI) -->
+      <div id="proUnlockedView" class="pro-tools-container" style="display:none;">
+        <p style="color: #34d399; font-weight: bold; margin-bottom: 18px;">✅ Accesso PRO Attivo! Hai sbloccato tutti i simulatori avanzati.</p>
+
+        <!-- PRO TOOL 1: SIMULATORE FIRE -->
+        <div class="pro-subcard">
+          <h4>🔥 1. Simulatore FIRE (Indipendenza Finanziaria)</h4>
+          <p class="card-subtitle">Basato sulla regola del 4%: calcola il capitale necessario per coprire le tue spese annuali senza lavorare.</p>
+          <div class="form-group">
+            <label for="speseMensiliFire">Spese Mensili Stimate per Vivere (€):</label>
+            <input type="number" id="speseMensiliFire" placeholder="es. 1500">
+          </div>
+          <button class="btn-calc-pro" onclick="calcolaFire()">Calcola Capitale FIRE</button>
+          <div id="risultatoFire" class="result-pro" style="display:none;"></div>
+        </div>
+
+        <!-- PRO TOOL 2: OBIETTIVO INVERSO -->
+        <div class="pro-subcard">
+          <h4>🎯 2. Calcolatore Obiettivo Finanziario (Inverso)</h4>
+          <p class="card-subtitle">Vuoi raggiungere una cifra precisa (es. anticipo casa, auto, fondo)? Scopri quanto accantonare al mese.</p>
+          <div class="form-group">
+            <label for="obiettivoCifra">Capitale che vuoi raggiungere (€):</label>
+            <input type="number" id="obiettivoCifra" placeholder="es. 30000">
+          </div>
+          <div class="form-group">
+            <label for="obiettivoAnni">In quanti anni vuoi raggiungerlo?</label>
+            <input type="number" id="obiettivoAnni" placeholder="es. 5">
+          </div>
+          <div class="form-group">
+            <label for="obiettivoRendimento">Rendimento annuo stimato (% - 0% se solo risparmio):</label>
+            <input type="number" id="obiettivoRendimento" placeholder="3" value="3">
+          </div>
+          <button class="btn-calc-pro" onclick="calcolaObiettivo()">Calcola Rata Mensile Necessaria</button>
+          <div id="risultatoObiettivo" class="result-pro" style="display:none;"></div>
+        </div>
+
+        <!-- PRO TOOL 3: IMPATTO INFLAZIONE -->
+        <div class="pro-subcard" style="margin-bottom: 0;">
+          <h4>📉 3. Calcolatore Impatto Inflazione</h4>
+          <p class="card-subtitle">Scopri quanto potere d'acquisto perdono i tuoi soldi lasciati fermi sul conto corrente.</p>
+          <div class="form-group">
+            <label for="capitaleFermo">Somma lasciata ferma oggi (€):</label>
+            <input type="number" id="capitaleFermo" placeholder="es. 20000">
+          </div>
+          <div class="form-group">
+            <label for="anniInflazione">Tra quanti anni?</label>
+            <input type="number" id="anniInflazione" placeholder="es. 15">
+          </div>
+          <div class="form-group">
+            <label for="tassoInflazione">Inflazione media annua stimata (%):</label>
+            <input type="number" id="tassoInflazione" placeholder="2.5" value="2.5" step="0.1">
+          </div>
+          <button class="btn-calc-pro" onclick="calcolaInflazione()">Calcola Potere d'Acquisto Reale</button>
+          <div id="risultatoInflazione" class="result-pro" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFFILIAZIONE 2 -->
+    <div class="affiliate-box">
+      <h4>🏦 Cerchi un conto deposito per proteggere la liquidità dall'inflazione?</h4>
+      <p>Confronta i migliori conti remunerati senza vincoli disponibili in Italia.</p>
+      <a href="LINK_AFFILIATO_SECONDO" class="btn-affiliate" target="_blank">Confronta i Conti</a>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 NewsBrief Finance. Tutti gli strumenti hanno valore puramente indicativo e scopo educativo.</p>
+      <!-- PULSANTE TEST PER TE -->
+      <button class="dev-test-btn" onclick="toggleTestPro()">[Modalità Test: Sblocca / Blocca Area PRO]</button>
+    </footer>
+  </div>
+
+  <script>
+    // --- GESTIONE SBLOCCO AREA PRO ---
+    function inizializzaPro() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('sblocca') === 'pro') {
+        localStorage.setItem('newsbrief_pro_unlocked', 'true');
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      aggiornaVistaPro();
+    }
+
+    function aggiornaVistaPro() {
+      const isUnlocked = localStorage.getItem('newsbrief_pro_unlocked') === 'true';
+      const lockedView = document.getElementById('proLockedView');
+      const unlockedView = document.getElementById('proUnlockedView');
+      const badge = document.getElementById('proStatusBadge');
+
+      if (isUnlocked) {
+        lockedView.style.display = 'none';
+        unlockedView.style.display = 'block';
+        badge.textContent = '🔓 Sbloccata';
+        badge.classList.add('unlocked');
+      } else {
+        lockedView.style.display = 'block';
+        unlockedView.style.display = 'none';
+        badge.textContent = '🔒 Bloccata';
+        badge.classList.remove('unlocked');
+      }
+    }
+
+    // Funzione simulazione acquisto (per testare subito senza errori 404)
+    function simulaAcquistoStripe() {
+      localStorage.setItem('newsbrief_pro_unlocked', 'true');
+      aggiornaVistaPro();
+      alert("🎉 (Simulazione) Pagamento completato con successo! Area PRO sbloccata.");
+    }
+
+    function toggleTestPro() {
+      const current = localStorage.getItem('newsbrief_pro_unlocked') === 'true';
+      if (current) {
+        localStorage.removeItem('newsbrief_pro_unlocked');
+      } else {
+        localStorage.setItem('newsbrief_pro_unlocked', 'true');
+      }
+      aggiornaVistaPro();
+    }
+
+    window.addEventListener('DOMContentLoaded', inizializzaPro);
+
+    // --- 1. CALCOLO SUDDIVISIONE INTELLIGENTE STIPENDIO (FREE) ---
+    function calcolaBudget() {
+      const stipendio = parseFloat(document.getElementById('stipendioBudget').value);
+      const resDiv = document.getElementById('risultatoBudget');
+
+      if (isNaN(stipendio) || stipendio <= 0) {
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "❌ Inserisci un importo mensile valido.";
+        return;
+      }
+
+      const speseFisse = stipendio * 0.50;
+      const tempoLibero = stipendio * 0.25;
+      const fondoSicurezza = stipendio * 0.10;
+      const investimenti = stipendio * 0.15;
+
+      resDiv.style.display = 'block';
+      resDiv.innerHTML = `
+        🏠 <strong>Spese Essenziali & Bollette:</strong> € ${speseFisse.toFixed(2)}<br>
+        🎉 <strong>Tempo Libero & Svaghi:</strong> € ${tempoLibero.toFixed(2)}<br>
+        🛡️ <strong>Fondo Emergenza (Liquidità):</strong> € ${fondoSicurezza.toFixed(2)}<br>
+        📈 <strong>Crescita & Investimenti (PAC):</strong> € ${investimenti.toFixed(2)}
+      `;
+    }
+
+    // --- 2. CALCOLO PAC & INTERESSE COMPOSTO (FREE) ---
+    function calcolaPac() {
+      const mensile = parseFloat(document.getElementById('investimentoMensile').value);
+      const anni = parseFloat(document.getElementById('anniPac').value);
+      let rendimentoAnnuo = parseFloat(document.getElementById('rendimentoStimato').value);
+      const resDiv = document.getElementById('risultatoPac');
+
+      if (isNaN(mensile) || isNaN(anni) || mensile <= 0 || anni <= 0) {
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "❌ Inserisci valori validi per accantonamento e anni.";
+        return;
+      }
+
+      if (isNaN(rendimentoAnnuo) || rendimentoAnnuo < 0) {
+        rendimentoAnnuo = 6;
+      }
+
+      const mesi = anni * 12;
+      const tassoMensile = (rendimentoAnnuo / 100) / 12;
+      let montante = 0;
+
+      for (let i = 0; i < mesi; i++) {
+        montante = (montante + mensile) * (1 + tassoMensile);
+      }
+
+      const totaleVersato = mensile * mesi;
+      const guadagnoInteressi = montante - totaleVersato;
+
+      resDiv.style.display = 'block';
+      resDiv.innerHTML = `
+        💰 Capitale Finale Stimato: <strong>€ ${montante.toLocaleString('it-IT', {maximumFractionDigits: 2})}</strong><br>
+        📥 Totale Versato di Tasca Tua: € ${totaleVersato.toLocaleString('it-IT', {maximumFractionDigits: 2})}<br>
+        📈 Guadagno da Interesse Composto: <strong>+€ ${guadagnoInteressi.toLocaleString('it-IT', {maximumFractionDigits: 2})}</strong>
+      `;
+    }
+
+    // --- PRO 1: CALCOLO FIRE ---
+    function calcolaFire() {
+      const speseMensili = parseFloat(document.getElementById('speseMensiliFire').value);
+      const resDiv = document.getElementById('risultatoFire');
+
+      if (isNaN(speseMensili) || speseMensili <= 0) {
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "❌ Inserisci le tue spese mensili stimate.";
+        return;
+      }
+
+      const speseAnnue = speseMensili * 12;
+      const capitaleFire = speseAnnue * 25;
+
+      resDiv.style.display = 'block';
+      resDiv.innerHTML = `
+        📅 Spese Annuali da Coprire: <strong>€ ${speseAnnue.toLocaleString('it-IT')}</strong><br>
+        🔥 Capitale FIRE Obiettivo (Regola del 4%): <strong>€ ${capitaleFire.toLocaleString('it-IT')}</strong><br>
+        <span style="font-size:0.85rem; color:#94a3b8;">Con questa cifra investita, puoi prelevare il 4% annuo (€ ${speseMensili.toLocaleString('it-IT')}/mese) mantenendo il capitale nel tempo.</span>
+      `;
+    }
+
+    // --- PRO 2: OBIETTIVO INVERSO ---
+    function calcolaObiettivo() {
+      const target = parseFloat(document.getElementById('obiettivoCifra').value);
+      const anni = parseFloat(document.getElementById('obiettivoAnni').value);
+      let rendimento = parseFloat(document.getElementById('obiettivoRendimento').value);
+      const resDiv = document.getElementById('risultatoObiettivo');
+
+      if (isNaN(target) || isNaN(anni) || target <= 0 || anni <= 0) {
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "❌ Inserisci cifra obiettivo e anni validi.";
+        return;
+      }
+
+      if (isNaN(rendimento) || rendimento < 0) rendimento = 0;
+
+      const mesi = anni * 12;
+      let rataMensile = 0;
+
+      if (rendimento === 0) {
+        rataMensile = target / mesi;
+      } else {
+        const r = (rendimento / 100) / 12;
+        rataMensile = (target * r) / ((Math.pow(1 + r, mesi) - 1) * (1 + r));
+      }
+
+      resDiv.style.display = 'block';
+      resDiv.innerHTML = `
+        🎯 Per raggiungere <strong>€ ${target.toLocaleString('it-IT')}</strong> in ${anni} anni:<br>
+        💰 Devi accantonare: <strong>€ ${rataMensile.toFixed(2)} al mese</strong>
+      `;
+    }
+
+    // --- PRO 3: IMPATTO INFLAZIONE ---
+    function calcolaInflazione() {
+      const capitale = parseFloat(document.getElementById('capitaleFermo').value);
+      const anni = parseFloat(document.getElementById('anniInflazione').value);
+      let inflazione = parseFloat(document.getElementById('tassoInflazione').value);
+      const resDiv = document.getElementById('risultatoInflazione');
+
+      if (isNaN(capitale) || isNaN(anni) || capitale <= 0 || anni <= 0) {
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = "❌ Inserisci importo e anni validi.";
+        return;
+      }
+
+      if (isNaN(inflazione) || inflazione < 0) inflazione = 2.5;
+
+      const potereAcquistoReale = capitale / Math.pow(1 + (inflazione / 100), anni);
+      const perdita = capitale - potereAcquistoReale;
+
+      resDiv.style.display = 'block';
+      resDiv.innerHTML = `
+        💸 Valore Nominale sul Conto: € ${capitale.toLocaleString('it-IT')}<br>
+        📉 Potere d'Acquisto Reale tra ${anni} anni: <strong>€ ${potereAcquistoReale.toLocaleString('it-IT', {maximumFractionDigits: 2})}</strong><br>
+        ⚠️ Valore bruciato dall'inflazione: <strong>-€ ${perdita.toLocaleString('it-IT', {maximumFractionDigits: 2})}</strong>
+      `;
+    }
+  </script>
+</body>
+</html>
